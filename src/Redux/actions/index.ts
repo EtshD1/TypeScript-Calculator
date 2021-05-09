@@ -1,25 +1,29 @@
 import types from '../types';
 
-export const AddNumber = (num: number | string) => ({
+export const AddNumber = (str: string) => ({
   type: types.ADD_NUMBER,
-  payload: num
+  payload: str
 });
 
-export const AddOp = (op: string) => ({
+export const Calculate = (str: string) => ({
+  type: types.CALCULATE,
+  payload: str
+});
+
+export const AddOp = (str: string) => ({
   type: types.ADD_OPERATION,
-  payload: op
+  payload: str
+});
+
+export const EditNumber = (str: string) => ({
+  type: types.EDIT_NUMBER,
+  payload: str
 });
 
 export const Clear = () => ({
   type: types.CLEAR
 });
 
-export const Calculate = (input: string) => ({
-  type: types.CALCULATE,
-  payload: input
-});
-
 export const AddDecimal = () => ({
   type: types.ADD_DECIMAL
 });
-

@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from '../styles.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddNumber, Clear, AddOp, Calculate, AddDecimal } from '../Redux/actions';
+import { AddNumber, Calculate, AddOp, EditNumber, Clear, AddDecimal } from '../Redux/actions';
 import { RootState } from '../Redux/reducers';
+import { calc } from '../calc';
 
 const arr = [
   {
@@ -76,6 +77,7 @@ const arr = [
 ];
 
 const Controls = () => {
+  const outcome = useSelector((state: RootState) => state.outcome);
   const input = useSelector((state: RootState) => state.input);
   const dispatch = useDispatch();
 
@@ -84,17 +86,32 @@ const Controls = () => {
       {
         arr.map(i => {
           if (i.content === '/' || i.content === 'x' || i.content === '-' || i.content === '+') {
-            return <div key={i.id} id={i.id} className={styles.operator} onClick={() => dispatch(AddOp(i.content.toString()))}>{i.content}</div>;
+            return <div
+              key={i.id} id={i.id}
+              className={styles.operator}
+              onClick={() => { dispatch(AddNumber(outcome)); dispatch(AddOp(`${i.content}`)) }}
+            >
+              {i.content}
+            </div>;
           } else if (i.content === 'AC') {
             return <div key={i.id} id={i.id} className={styles.acBtn} onClick={() => dispatch(Clear())}>{i.content}</div>;
           } else if (i.content === '=') {
-            return <div key={i.id} id={i.id} className={styles.equal} onClick={() => dispatch(Calculate(input))}>{i.content}</div>;
+            return <div
+              key={i.id}
+              id={i.id}
+              className={styles.equal}
+              onClick={() => {
+                dispatch(AddNumber(outcome));
+                dispatch(Calculate(calc(input.join(""))));
+              }}>
+              {i.content}
+            </div>;
           } else if (i.content === 0) {
-            return <div key={i.id} id={i.id} className={styles.zero} onClick={() => dispatch(AddNumber(i.content))}>{i.content}</div>;
+            return <div key={i.id} id={i.id} className={styles.zero} onClick={() => { dispatch(EditNumber(`${i.content}`)) }}>{i.content}</div>;
           } else if (i.content === '.') {
             return <div key={i.id} id={i.id} className={styles.number} onClick={() => dispatch(AddDecimal())}>{i.content}</div>;
           }
-          return <div key={i.id} id={i.id} className={styles.number} onClick={() => dispatch(AddNumber(i.content))}>{i.content}</div>;
+          return <div key={i.id} id={i.id} className={styles.number} onClick={() => { dispatch(EditNumber(`${i.content}`)) }}>{i.content}</div>;
         })
       }
     </div>

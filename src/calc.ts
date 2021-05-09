@@ -51,5 +51,6 @@ const add = (str: string) => {
 }
 
 export const calc = (str: string) => {
+  console.log(str)
   return add(str);
 }
