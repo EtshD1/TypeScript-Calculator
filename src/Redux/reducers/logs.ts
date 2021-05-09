@@ -1,4 +1,5 @@
 import types from '../types';
+import { calc } from '../calc';
 
 type Action = {
   type: string,
@@ -15,6 +16,11 @@ const checkDecimal = (str: string) => {
 
 const inputReducer = (state = '', action: Action) => {
   switch (action.type) {
+    case types.CALCULATE:
+      if (action.payload === '') {
+        return '0';
+      }
+      return calc(`${action.payload}`);
     case types.ADD_NUMBER:
       return `${state}${action.payload}`;
     case types.ADD_DECIMAL:
