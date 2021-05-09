@@ -7,7 +7,7 @@
   background-color: #B76D68;
 }
 
-.calculator, .display {
+.calculator, .screen {
   background-color: #000;
 }
 
@@ -39,12 +39,12 @@
   color: #000;
 }
 
-.display {
+.screen {
   padding: 0.25rem;
   padding-bottom: 0;
 }
 
-.logs, .mainDisplay {
+.logs, .display {
   font-family: digital;
   text-align: right;
 }
@@ -55,7 +55,7 @@
   color: #FF6978;
 }
 
-.mainDisplay {
+.display {
   font-size: 1.5rem;
   height: 1.5rem;
   color: #fff;

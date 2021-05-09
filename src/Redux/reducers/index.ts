@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
-import mainNumberReducer from './mainNumber';
-import logs from './logs';
+import outcomeReducer from './outcome';
+import inputReducer from './logs';
 
 const reducers = combineReducers({
-  main: mainNumberReducer,
-  log: logs
+  outcome: outcomeReducer,
+  input: inputReducer
 });
 
 export default reducers;
 
 export type RootState = {
-  main: number,
-  log: string
+  outcome: number,
+  input: string
 }
